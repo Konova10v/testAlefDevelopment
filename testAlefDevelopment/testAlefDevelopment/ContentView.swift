@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var firstName = ""
     @State private var lastName = ""
+    @State private var patronymic = ""
     @State private var age = ""
     @State var listItems = [1]
     
@@ -31,6 +32,14 @@ struct ContentView: View {
                         Image(systemName: "person")
                             .foregroundColor(.gray)
                         TextField("Введите вашу фамилию", text: $lastName)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(5)
+                    
+                    HStack {
+                        Image(systemName: "person")
+                            .foregroundColor(.gray)
+                        TextField("Введите вашe отвество", text: $patronymic)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(5)
