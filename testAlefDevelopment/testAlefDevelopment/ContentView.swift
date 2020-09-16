@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var age = ""
-    @State var listItems = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+    @State var listItems = [1]
     
     var body: some View {
         NavigationView() {
@@ -48,16 +48,21 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 
                 VStack {
-                    HStack {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .foregroundColor(Color.red)
-                            .frame(width: 20, height: 20)
+                    if listItems.count <= 4 {
+                        HStack {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .foregroundColor(Color.red)
+                                .frame(width: 20, height: 20)
+                        }
+                        .padding(20)
+                        .background(Color.white)
+                        .cornerRadius(100)
+                        .shadow(radius: 5)
+                        .onTapGesture {
+                            self.listItems.append(1)
+                        }
                     }
-                    .padding(20)
-                    .background(Color.white)
-                    .cornerRadius(100)
-                    .shadow(radius: 5)
                     
                     Text("Дети")
                 }
