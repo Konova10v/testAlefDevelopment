@@ -13,7 +13,7 @@ struct ContentView: View {
     @State private var lastName = ""
     @State private var patronymic = ""
     @State private var age = ""
-    @State var listItems = [1]
+    @State var childrenArray: [Children] = []
     
     var body: some View {
         NavigationView() {
@@ -57,7 +57,7 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 
                 VStack {
-                    if listItems.count <= 4 {
+                    if childrenArray.count <= 4 {
                         HStack {
                             Image(systemName: "plus")
                                 .resizable()
@@ -69,7 +69,7 @@ struct ContentView: View {
                         .cornerRadius(100)
                         .shadow(radius: 5)
                         .onTapGesture {
-                            self.listItems.append(1)
+                            self.childrenArray.append(Children(name: "", age: ""))
                         }
                     }
                     
@@ -77,18 +77,27 @@ struct ContentView: View {
                 }
                 
                 List {
-                    ForEach(listItems, id: \.self) { (item) in
-                        ChildrenView()
+                    ForEach(childrenArray.indices, id: \.self) { i in
+                        ChildrenView(model: Binding(
+                          get: {
+                            return self.childrenArray[i]
+                        },
+                        set: { (newValue) in
+                            self.childrenArray[i] = newValue
+                        }))
                     }.onDelete(perform: self.deleteItem)
                 }
             }
             .padding(.top, 10)
-        .navigationBarTitle("Вы и Дети")
+            .navigationBarTitle("Вы и Дети")
+            .onAppear(perform: {
+                UITableView.appearance().separatorStyle = .none
+            })
         }
     }
     
     private func deleteItem(at indexSet: IndexSet) {
-        self.listItems.remove(atOffsets: indexSet)
+        self.childrenArray.remove(atOffsets: indexSet)
     }
 }
 

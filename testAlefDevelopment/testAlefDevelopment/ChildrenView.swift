@@ -8,16 +8,20 @@
 
 import SwiftUI
 
+struct Children {
+    var name: String
+    var age: String
+}
+
 struct ChildrenView: View {
-    @State private var childrenName = ""
-    @State private var childrenAge = ""
+    @Binding var model: Children
     
     var body: some View {
         VStack(alignment: .center) {
             HStack {
                 Image(systemName: "person")
                     .foregroundColor(.gray)
-                TextField("Введите имя ребенка", text: $childrenName)
+                TextField("Введите имя ребенка", text: $model.name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding(5)
@@ -26,7 +30,7 @@ struct ChildrenView: View {
             HStack {
                 Image(systemName: "person")
                     .foregroundColor(.gray)
-                TextField("Введите возраст ребенка", text: $childrenAge)
+                TextField("Введите возраст ребенка", text: $model.age)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding(5)
@@ -39,6 +43,6 @@ struct ChildrenView: View {
 
 struct ChildrenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChildrenView()
+        ChildrenView(model: .constant(Children(name: "", age: "")))
     }
 }
