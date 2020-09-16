@@ -64,7 +64,7 @@ struct ContentView: View {
                                 .foregroundColor(Color.red)
                                 .frame(width: 20, height: 20)
                         }
-                        .padding(20)
+                        .padding(10)
                         .background(Color.white)
                         .cornerRadius(100)
                         .shadow(radius: 5)
@@ -75,6 +75,7 @@ struct ContentView: View {
                     
                     Text("Дети")
                 }
+                .padding(.top, 10)
                 
                 List {
                     ForEach(childrenArray.indices, id: \.self) { i in
